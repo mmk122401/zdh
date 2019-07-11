@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+<div class="login-container">
+    <h1>虹口浪漫CRM</h1>
+    <div class="connect">
+        <p>欢迎来到红浪漫crm！</p>
+    </div>
+    <form action="" method="post" id="loginForm" novalidate="novalidate">
+        {% csrf_token %}
+        <div>
+            <input type="text" name="username" class="username" placeholder="用户名" autocomplete="off" value="admin">
+        </div>
+        <div>
+            <input type="password" name="password" class="password" placeholder="密码" oncontextmenu="return false"
+                   onpaste="return false">
+        </div>
+        <p>{{ error }}</p>
+        <button id="submit" type="submit">登 陆</button>
+    </form>
+    <a href="{% url 'reg' %}">
+        <button type="button" class="register-tis">还有没有账号？</button>
+    </a>
+</div>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/common.js' %}"></script>
+<script src="{% static 'js/supersized.3.2.7.min.js' %}"></script>
+<script src="{% static 'js/supersized-init.js' %}"></script>
+<script src="{% static 'js/jquery.validate.min.js' %}"></script>
+
+</body>
+</html>

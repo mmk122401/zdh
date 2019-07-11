@@ -1,0 +1,74 @@
+{% extends 'muban.html' %}
+{% block content %}
+    {% load my_tags %}
+    <a href="{% reverse_url request 'add_customer' %}">
+        <button class="btn btn-primary">添加纪录</button>
+    </a><br>
+    <div class="pull-right">
+        <form action="" class="form-inline">
+            <input type="text" name="query" class="form-control">
+            <button class="btn btn-primary">搜索</button>
+        </form>
+    </div>
+
+    <form action="" method="post" class="form-inline">
+        {% csrf_token %}
+        <select name="action" id="" class="form-control">
+            {% if request.path_info == '/customer_list/' %}
+                <option value="muti_apply">公户变私户</option>
+            {% else %}
+                <option value="muti_pub">私户变公户</option>
+            {% endif %}
+        </select>
+        <button class="btn btn-success">提交</button>
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th>选择</th>
+                <th>序号</th>
+                <th>QQ</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>手机号</th>
+                <th>客户来源</th>
+                <th>咨询课程</th>
+                <th>状态</th>
+                <th>跟进时间</th>
+                <th>查看跟进</th>
+                <th>添加报名</th>
+                <th>销售</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for customer in all_customer %}
+                <tr>
+                    <td><input type="checkbox" name="ids" value="{{ customer.pk }}"></td>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ customer.qq }}</td>
+                    <td>{{ customer.name }}</td>
+                    <td>{{ customer.get_sex_display|default:'不详' }}</td>
+                    <td>{{ customer.phone|default:'暂无' }}</td>
+                    <td>{{ customer.get_source_display }}</td>
+                    <td>{{ customer.course }}</td>
+                    <td>{{ customer.show_status }}</td>
+                    <td>{{ customer.last_consult_date }}</td>
+                    <td><a href="{% url 'one_consult_list' customer.pk %}">查看</a></td>
+                    <td><a href="{% reverse_url request 'add_enrollment' customer_id=customer.pk %}">添加</a></td>
+                    <td>{{ customer.consultant|default:'暂无' }}</td>
+                    <td><a href="{% reverse_url request 'edit_customer' customer.pk %}"> <i class="fa fa-edit"></i>编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="{% reverse_url request 'del_customer' customer.pk %}"> <i class="fa fa-times"></i>删除</a>
+                    </td>
+
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </form>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            {{ page_html|safe }}
+        </ul>
+    </nav>
+{% endblock %}

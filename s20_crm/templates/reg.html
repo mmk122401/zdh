@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>{% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+<div class="login-container">
+    <h1>虹口浪漫注册</h1>
+    <div class="connect">
+        <p>红浪漫注册</p>
+    </div>
+    <form action="" method="post" id="registerForm" novalidate="novalidate">
+        {% csrf_token %}
+        <div>
+            {{ form_obj.username }}
+            {{ form_obj.username.errors.0 }}
+        </div>
+        <div>
+            {{ form_obj.password }}
+            {{ form_obj.password.errors.0 }}
+        </div>
+        <div>
+            {{ form_obj.re_password }}
+            {{ form_obj.re_password.errors.0 }}
+        </div>
+        <div>
+            {{ form_obj.name }}
+            {{ form_obj.name.errors.0 }}
+        </div>
+        <div>
+            {{ form_obj.mobile }}
+            {{ form_obj.mobile.errors.0 }}
+        </div>
+        <div>
+            {{ form_obj.department }}
+            {{ form_obj.department.errors.0 }}
+        </div>
+
+
+        <button id="submit" type="submit">注 册</button>
+    </form>
+    <a href="{% url 'login' %}">
+        <button type="button" class="register-tis">已经有账号？</button>
+    </a>
+</div>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/common.js' %}"></script>
+<script src="{% static 'js/supersized.3.2.7.min.js' %}"></script>
+<script src="{% static 'js/supersized-init.js' %}"></script>
+<script src="{% static 'js/jquery.validate.min.js' %}"></script>
+
+</body>
+</html>

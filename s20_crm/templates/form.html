@@ -1,0 +1,33 @@
+{% extends 'muban.html' %}
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ title }}</h3>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" novalidate method="post">
+                {% csrf_token %}
+                {% for field in form_obj %}
+                    <div class="form-group {% if field.errors %}has-error{% endif %}">
+
+                        <label for="{{ field.id_for_label }}"
+                               class="col-sm-2 col-sm-offset-2 control-label"
+                               {% if not field.field.required %}style="color:#8c8c8c"{% endif %}>{{ field.label }}</label>
+                        <div class="col-sm-5">
+                            {{ field }}
+                            <span id="helpBlock2" class="help-block">
+                                {{ field.errors.0 }}
+                            </span>
+                        </div>
+                    </div>
+                {% endfor %}
+                <p class="text-center text-danger">{{ form_obj.non_field_errors.0 }}</p> {# 这是显示所有的错误，相当于__all__的错误 #}
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-6">
+                        <button type="submit" class="btn btn-success pull-right">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

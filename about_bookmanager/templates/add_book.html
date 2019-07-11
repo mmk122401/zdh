@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.3.7-dist/css/bootstrap.css' %}">
+    <style>
+        body {
+            margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="row ">
+    <div class="col-lg-8 col-lg-offset-2">
+        <div class="panel panel-primary">
+
+            <div class="panel-heading">添加书籍</div>
+            <div class="panel-body">
+                <form method="post" class="form-horizontal">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">书籍名称</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="inputEmail3" placeholder="请添加书籍名称"
+                                   name="book_name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">价格</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="inputEmail3" placeholder="价格" name="price">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">出版日期</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="inputEmail3" placeholder="出版日期" name="date">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">出版社</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="inputEmail3" placeholder="出版社" name="publisher">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary pull-right">提交</button>
+                </form>
+                <a href="{% url 'book_list' %}"><button class="btn btn-success pull-right">返回</button></a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<script src="jquery.js"></script>
+</body>
+</html>
